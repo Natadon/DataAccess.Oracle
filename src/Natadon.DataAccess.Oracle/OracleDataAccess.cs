@@ -31,9 +31,20 @@ namespace Natadon.DataAccess.Oracle
         /// <param name="UserName">Username to login with</param>
         /// <param name="Password">Password for the provided user account</param>
         /// <param name="CommandTimeout">Connection timeout in seconds (default is 30 seconds)</param>
-        public OracleDataAccess(string ServerName, string UserName, string Password, int CommandTimeout = 30)
+        /// <param name="PortNumber">Port number to connect to the server (default is 1521)</param>
+        /// <param name="SID">This value is required if the client that is running this application does not have an Oracle client installed.  It is required to build the full connection string.</param>
+        public OracleDataAccess(string ServerName, string UserName, string Password, int CommandTimeout = 30, int PortNumber = 1521, string SID = "")
         {
-            connectionString = string.Format("Data Source={0};User Id={1};Password={2}", ServerName, UserName, Password);
+            // check to see if they pass in the SID.  If they do, we need to create the full Oracle connection string (without using tnsnames.ora)
+            if(SID.Length > 0)
+            {
+                connectionString = string.Format("Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={0})(PORT={1}))(CONNECT_DATA=(SERVICE_NAME={2})));User Id={3};Password={4};", ServerName, PortNumber, SID, UserName, Password);
+            }
+            else
+            {
+                connectionString = string.Format("Data Source={0};User Id={1};Password={2}", ServerName, UserName, Password);
+            }
+            
 
             connection = new OracleConnection(connectionString);
             commandTimeout = CommandTimeout;
