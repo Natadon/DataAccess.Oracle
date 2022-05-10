@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <PackageReference Include="Natadon.DataAccess.Core" Version="1.0.1" />
-    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="3.21.3" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="3.21.61" />
   </ItemGroup>
 
   <ItemGroup>
