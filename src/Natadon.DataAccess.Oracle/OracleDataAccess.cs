@@ -38,7 +38,7 @@ namespace Natadon.DataAccess.Oracle
             // check to see if they pass in the SID.  If they do, we need to create the full Oracle connection string (without using tnsnames.ora)
             if(ServiceName.Length > 0)
             {
-                connectionString = string.Format("User Id={0};Password={1};Data Source{2}:{3}/{4}", UserName, Password, ServerName, PortNumber, ServiceName);
+                connectionString = string.Format("User Id={0};Password={1};Data Source={2}:{3}/{4}", UserName, Password, ServerName, PortNumber, ServiceName);
                     //string.Format("Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={0})(PORT={1}))(CONNECT_DATA=(SERVICE_NAME=(SID={2}))));User Id={3};Password={4};", ServerName, PortNumber, SID, UserName, Password);
             }
             else
